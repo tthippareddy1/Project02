@@ -14,6 +14,13 @@ if (!isset($_SESSION['user_id'])) {
 </head>
 <body>
   <h1>Welcome, <?= htmlspecialchars($_SESSION['username']) ?></h1>
+  <label for="bg-selector">Background:</label>
+  <select id="bg-selector">
+    <option value="background1.jpg">Scenic</option>
+    <option value="background2.jpg">Cityscape</option>
+    <option value="background3.jpg">Abstract</option>
+    <option value="background4.jpg">Pattern</option>
+</select>
 
   <div id="puzzlearea"></div>
   <button id="shuffleButton">Shuffle</button>

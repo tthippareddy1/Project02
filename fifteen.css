@@ -48,7 +48,6 @@ body {
     font-size: 32pt;
     text-align: center;
     line-height: 96px;
-    background-image: url("background.jpg");
     background-size: 400px 400px;
     user-select: none;
   }

@@ -1,13 +1,20 @@
 // fifteen.js
 
 "use strict";
-
+let currentBg = "background1.jpg";
 window.onload = function() {
   setupPuzzle();
+  applyBackground(currentBg);
+  
   document.getElementById("shuffleButton").onclick = function() {
     shufflePuzzle();
     resetStats();
   };
+  document.getElementById("bg-selector")
+    .addEventListener("change", e => {
+      currentBg = e.target.value;
+      applyBackground(currentBg);
+    });
   startTimer();
 };
 
@@ -42,6 +49,7 @@ function setupPuzzle() {
       num++;
     }
   }
+  applyBackground(currentBg);
 }
 
 /** Can this tile move into the blank? */
@@ -102,6 +110,12 @@ function shufflePuzzle() {
 function tileAt(r, c) {
   return document.querySelector(`.puzzlepiece[data-row='${r}'][data-col='${c}']`);
 }
+
+function applyBackground(url) {
+    document.querySelectorAll(".puzzlepiece").forEach(tile => {
+      tile.style.backgroundImage = `url('${url}')`;
+    });
+  }
 
 /** Stats: moves & timer */
 function resetStats() {

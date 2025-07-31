@@ -1,10 +1,21 @@
 <?php
 session_start();
-$host = '127.0.0.1';
-$user = 'root';
-$pass = 'root';
-$db   = 'fifteen_puzzle';
+
+$url = parse_url(getenv("DATABASE_URL"));
+$host   = $url["host"];
+$port   = $url["port"];
+$user   = $url["user"];
+$pass   = $url["pass"];
+$dbname = ltrim($url["path"], "/");
+
+// Use the pgsql driver
+$dsn = "pgsql:host={$host};port={$port};dbname={$dbname}";
 $opts = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
-$pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4",$user,$pass,$opts);
-?>
+
+try {
+  $pdo = new PDO($dsn, $user, $pass, $opts);
+} catch (PDOException $e) {
+  exit("DB Connection failed: " . $e->getMessage());
+}
+
 

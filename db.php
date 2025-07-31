@@ -1,12 +1,15 @@
 <?php
 session_start();
 
-$url = parse_url(getenv("DATABASE_URL"));
+
+
+$url    = parse_url(getenv("DATABASE_URL"));
 $host   = $url["host"];
-$port   = $url["port"];
+$port   = isset($url["port"]) ? $url["port"] : 5432;   // default for Postgres
 $user   = $url["user"];
 $pass   = $url["pass"];
 $dbname = ltrim($url["path"], "/");
+
 
 // Use the pgsql driver
 $dsn = "pgsql:host={$host};port={$port};dbname={$dbname}";
